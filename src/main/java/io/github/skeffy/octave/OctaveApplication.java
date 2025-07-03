@@ -1,4 +1,4 @@
-package io.github.skeffy.octave.octave;
+package io.github.skeffy.octave;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
