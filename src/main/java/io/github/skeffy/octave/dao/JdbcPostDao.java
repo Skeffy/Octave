@@ -1,8 +1,11 @@
 package io.github.skeffy.octave.dao;
 
+import io.github.skeffy.octave.exception.DaoException;
 import io.github.skeffy.octave.model.Post;
-import io.github.skeffy.octave.model.User;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -17,17 +20,55 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
-    public Post createPost(Post post) {
-        return null;
+    public Post getPostById(int postId) {
+        Post post = null;
+        String sql = "SELECT * FROM posts WHERE post_id = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, postId);
+            if (results.next()) {
+                post = mapRowToPost(results);
+            }
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Cannot connect to database", e);
+        }
+        return post;
     }
 
     @Override
-    public int deleteOwnPost(User user, int postId) {
+    public Post createPost(Post p) {
+        Post newPost;
+        String sql = "INSERT INTO posts(user_id, type, body) VALUES(?,?,?) RETURNING post_id;";
+        try {
+            int newId = jdbcTemplate.queryForObject(sql, int.class, p.getUserId(), p.getType(), p.getBody());
+            newPost = getPostById(newId);
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database", e);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return newPost;
+    }
+
+    @Override
+    public int deleteOwnPost(int userId, int postId) {
         return 0;
     }
 
     @Override
-    public int adminDeletePost(User user, int postId) {
+    public int adminDeletePost(int userId, int postId) {
         return 0;
+    }
+
+    private Post mapRowToPost(SqlRowSet r) {
+        Post p = new Post();
+        p.setUserId(r.getInt("user_id"));
+        p.setType(r.getString("type"));
+        p.setBody(r.getString("body"));
+        p.setDate(r.getDate("date"));
+        p.setLikes(r.getInt("likes"));
+        return p;
     }
 }
