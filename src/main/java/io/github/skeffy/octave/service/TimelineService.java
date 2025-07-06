@@ -7,11 +7,11 @@ import io.github.skeffy.octave.dao.TimelineDao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimelineCompiler {
+public class TimelineService {
 
     private final TimelineDao timelineDao;
 
-    public TimelineCompiler(TimelineDao timelineDao) {
+    public TimelineService(TimelineDao timelineDao) {
         this.timelineDao = timelineDao;
     }
 
