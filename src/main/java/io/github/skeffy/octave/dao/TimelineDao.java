@@ -1,7 +1,6 @@
 package io.github.skeffy.octave.dao;
 
 import io.github.skeffy.octave.model.Post;
-import io.github.skeffy.octave.model.User;
 
 import java.util.List;
 
