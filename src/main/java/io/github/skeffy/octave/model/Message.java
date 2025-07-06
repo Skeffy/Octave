@@ -2,12 +2,14 @@ package io.github.skeffy.octave.model;
 
 public class Message {
 
+    private int messageId;
     private User sender;
     private User recipient;
     private String message;
     private Music music;
 
-    public Message(User sender, User recipient, String message, Music music) {
+    public Message(int messageId, User sender, User recipient, String message, Music music) {
+        this.messageId = messageId;
         this.sender = sender;
         this.recipient = recipient;
         this.message = message;
@@ -15,6 +17,14 @@ public class Message {
     }
 
     public Message() {
+    }
+
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
     }
 
     public User getSender() {

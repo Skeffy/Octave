@@ -4,13 +4,15 @@ import java.util.Date;
 
 public class Comment {
 
+    private int commentId;
     private User user;
     private String body;
     private Date date;
     private int likes;
     private int parentId;
 
-    public Comment(User user, String body, Date date, int likes, int parentId) {
+    public Comment(int commentId, User user, String body, Date date, int likes, int parentId) {
+        this.commentId = commentId;
         this.user = user;
         this.body = body;
         this.date = date;
@@ -19,6 +21,14 @@ public class Comment {
     }
 
     public Comment() {
+    }
+
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 
     public User getUser() {

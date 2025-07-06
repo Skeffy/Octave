@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Post {
-    
+
+    private int postId;
     private String type;
     private User user;
     private String body;
@@ -12,7 +13,25 @@ public class Post {
     private int likes;
     private List<Comment> comments;
 
+    public Post(int postId, String type, User user, String body, Date date, int likes, List<Comment> comments) {
+        this.postId = postId;
+        this.type = type;
+        this.user = user;
+        this.body = body;
+        this.date = date;
+        this.likes = likes;
+        this.comments = comments;
+    }
+
     public Post() {
+    }
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public String getType() {
