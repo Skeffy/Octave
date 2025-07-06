@@ -3,10 +3,12 @@ package io.github.skeffy.octave.service;
 import io.github.skeffy.octave.model.Post;
 import io.github.skeffy.octave.model.Timeline;
 import io.github.skeffy.octave.dao.TimelineDao;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TimelineService {
 
     private final TimelineDao timelineDao;
