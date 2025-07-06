@@ -1,2 +1,4 @@
-package io.github.skeffy.octave.dao;public interface MessageDao {
+package io.github.skeffy.octave.dao;
+
+public interface MessageDao {
 }

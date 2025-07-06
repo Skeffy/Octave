@@ -1,2 +1,6 @@
-package io.github.skeffy.octave.dao;public interface FollowDao {
+package io.github.skeffy.octave.dao;
+
+public interface FollowDao {
+
+
 }

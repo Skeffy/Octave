@@ -1,2 +1,7 @@
-package io.github.skeffy.octave.controller;public class MessageController {
+package io.github.skeffy.octave.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MessageController {
 }
