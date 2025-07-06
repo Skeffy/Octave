@@ -4,6 +4,8 @@ import io.github.skeffy.octave.model.Post;
 
 public interface PostDao {
 
+    Post getPostById(int postId);
+
     Post createPost(Post post);
 
     int deleteOwnPost(int userId, int postId);
