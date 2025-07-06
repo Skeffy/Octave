@@ -6,12 +6,14 @@ public class User {
     private String username;
     private String screenName;
     private String photo;
+    private String bio;
 
-    public User(int id, String username, String screenName, String photo) {
+    public User(int id, String username, String screenName, String photo, String bio) {
         this.id = id;
         this.username = username;
         this.screenName = screenName;
         this.photo = photo;
+        this.bio = bio;
     }
 
     public int getId() {
@@ -44,5 +46,13 @@ public class User {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }
