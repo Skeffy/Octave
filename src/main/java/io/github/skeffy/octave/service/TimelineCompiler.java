@@ -1,8 +1,8 @@
-package io.github.skeffy.octave.timeline.service;
+package io.github.skeffy.octave.service;
 
 import io.github.skeffy.octave.model.Post;
 import io.github.skeffy.octave.model.Timeline;
-import io.github.skeffy.octave.timeline.dao.TimelineDao;
+import io.github.skeffy.octave.dao.TimelineDao;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
-package io.github.skeffy.octave.timeline.controller;
+package io.github.skeffy.octave.controller;
 
 import io.github.skeffy.octave.model.Timeline;
-import io.github.skeffy.octave.timeline.dao.TimelineDao;
-import io.github.skeffy.octave.timeline.service.TimelineCompiler;
+import io.github.skeffy.octave.dao.TimelineDao;
+import io.github.skeffy.octave.service.TimelineCompiler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

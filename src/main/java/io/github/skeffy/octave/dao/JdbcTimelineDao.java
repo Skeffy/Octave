@@ -1,4 +1,4 @@
-package io.github.skeffy.octave.timeline.dao;
+package io.github.skeffy.octave.dao;
 
 import io.github.skeffy.octave.exception.DaoException;
 import io.github.skeffy.octave.model.Post;

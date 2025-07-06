@@ -1,4 +1,4 @@
-package io.github.skeffy.octave.posting.dao;
+package io.github.skeffy.octave.dao;
 
 import io.github.skeffy.octave.model.Comment;
 import io.github.skeffy.octave.model.User;

@@ -1,6 +1,6 @@
-package io.github.skeffy.octave.posting.dao;
+package io.github.skeffy.octave.dao;
 
-import io.github.skeffy.octave.model.Post;
+import io.github.skeffy.octave.model.Comment;
 import io.github.skeffy.octave.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -8,26 +8,26 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 
 @Component
-public class JdbcPostDao implements PostDao{
+public class JdbcCommentDao implements CommentDao{
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcPostDao(DataSource dataSource) {
+    public JdbcCommentDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
-    public Post createPost(Post post) {
+    public Comment createComment(Comment comment) {
         return null;
     }
 
     @Override
-    public int deleteOwnPost(User user, int postId) {
+    public int deleteOwnComment(User user, int commentId) {
         return 0;
     }
 
     @Override
-    public int adminDeletePost(User user, int postId) {
+    public int adminDeleteComment(User user, int commentId) {
         return 0;
     }
 }
