@@ -2,7 +2,6 @@ package io.github.skeffy.octave.dao;
 
 import io.github.skeffy.octave.exception.DaoException;
 import io.github.skeffy.octave.model.Post;
-import io.github.skeffy.octave.model.User;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -59,7 +58,7 @@ public class JdbcTimelineDao implements TimelineDao{
     private Post mapRowToPost(SqlRowSet r) {
         Post p = new Post();
         //TODO: This is going to need so much rewriting when I actually layout the db schema
-        p.setUser(r.getObject("userId", User.class));
+        p.setUserId(r.getInt("userId"));
         p.setType(r.getString("type"));
         p.setBody(r.getString("body"));
         p.setDate(r.getDate("timestamp"));
