@@ -7,16 +7,16 @@ public class Post {
 
     private int postId;
     private String type;
-    private User user;
+    private int userId;
     private String body;
     private Date date;
     private int likes;
     private List<Comment> comments;
 
-    public Post(int postId, String type, User user, String body, Date date, int likes, List<Comment> comments) {
+    public Post(int postId, String type, int userId, String body, Date date, int likes, List<Comment> comments) {
         this.postId = postId;
         this.type = type;
-        this.user = user;
+        this.userId = userId;
         this.body = body;
         this.date = date;
         this.likes = likes;
@@ -42,12 +42,12 @@ public class Post {
         this.type = type;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getBody() {
