@@ -1,13 +1,12 @@
 package io.github.skeffy.octave.dao;
 
 import io.github.skeffy.octave.model.Post;
-import io.github.skeffy.octave.model.User;
 
 public interface PostDao {
 
     Post createPost(Post post);
 
-    int deleteOwnPost(User user, int postId);
+    int deleteOwnPost(int userId, int postId);
 
-    int adminDeletePost(User user, int postId);
+    int adminDeletePost(int userId, int postId);
 }
