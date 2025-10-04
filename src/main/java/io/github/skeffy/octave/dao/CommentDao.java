@@ -5,9 +5,11 @@ import io.github.skeffy.octave.model.User;
 
 public interface CommentDao {
 
+    Comment getCommentById(int commentId);
+
     Comment createComment(Comment comment);
 
-    int deleteOwnComment(User user, int commentId);
+    int deleteOwnComment(int userId, int commentId);
 
-    int adminDeleteComment(User user, int commentId);
+    int adminDeleteComment(int userId, int commentId);
 }
