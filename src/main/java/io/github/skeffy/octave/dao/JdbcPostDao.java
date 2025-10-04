@@ -54,7 +54,18 @@ public class JdbcPostDao implements PostDao{
 
     @Override
     public int deleteOwnPost(int userId, int postId) {
-        return 0;
+        int numberOfRows = 0;
+        String sql = "DELETE FROM posts WHERE post_id = ? AND user_id = ?;";
+        try {
+            numberOfRows = jdbcTemplate.update(sql, postId, userId);
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return numberOfRows;
     }
 
     @Override
