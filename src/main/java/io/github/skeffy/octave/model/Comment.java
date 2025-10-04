@@ -5,15 +5,15 @@ import java.util.Date;
 public class Comment {
 
     private int commentId;
-    private User user;
+    private int userId;
     private String body;
     private Date date;
     private int likes;
     private int parentId;
 
-    public Comment(int commentId, User user, String body, Date date, int likes, int parentId) {
+    public Comment(int commentId, int userId, String body, Date date, int likes, int parentId) {
         this.commentId = commentId;
-        this.user = user;
+        this.userId = userId;
         this.body = body;
         this.date = date;
         this.likes = likes;
@@ -31,12 +31,12 @@ public class Comment {
         this.commentId = commentId;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getBody() {
