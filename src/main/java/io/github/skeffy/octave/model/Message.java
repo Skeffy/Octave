@@ -3,15 +3,25 @@ package io.github.skeffy.octave.model;
 public class Message {
 
     private int messageId;
-    private User sender;
-    private User recipient;
+    private int parentId;
+    private int senderId;
+    private int recipientId;
     private String message;
     private Music music;
 
-    public Message(int messageId, User sender, User recipient, String message, Music music) {
+    public Message(int messageId, int senderId, int recipientId, String message, Music music) {
         this.messageId = messageId;
-        this.sender = sender;
-        this.recipient = recipient;
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+        this.message = message;
+        this.music = music;
+    }
+
+    public Message(int messageId, int parentId, int senderId, int recipientId, String message, Music music) {
+        this.messageId = messageId;
+        this.parentId = parentId;
+        this.senderId = senderId;
+        this.recipientId = recipientId;
         this.message = message;
         this.music = music;
     }
@@ -27,20 +37,28 @@ public class Message {
         this.messageId = messageId;
     }
 
-    public User getSender() {
-        return sender;
+    public int getParentId() {
+        return parentId;
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
-    public User getRecipient() {
-        return recipient;
+    public int getSenderId() {
+        return senderId;
     }
 
-    public void setRecipient(User recipient) {
-        this.recipient = recipient;
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
+    }
+
+    public int getRecipientId() {
+        return recipientId;
+    }
+
+    public void setRecipientId(int recipientId) {
+        this.recipientId = recipientId;
     }
 
     public String getMessage() {
