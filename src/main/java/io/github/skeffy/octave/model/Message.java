@@ -7,9 +7,9 @@ public class Message {
     private int senderId;
     private int recipientId;
     private String message;
-    private Music music;
+    private String music;
 
-    public Message(int messageId, int senderId, int recipientId, String message, Music music) {
+    public Message(int messageId, int senderId, int recipientId, String message, String music) {
         this.messageId = messageId;
         this.senderId = senderId;
         this.recipientId = recipientId;
@@ -17,7 +17,7 @@ public class Message {
         this.music = music;
     }
 
-    public Message(int messageId, int parentId, int senderId, int recipientId, String message, Music music) {
+    public Message(int messageId, int parentId, int senderId, int recipientId, String message, String music) {
         this.messageId = messageId;
         this.parentId = parentId;
         this.senderId = senderId;
@@ -69,11 +69,11 @@ public class Message {
         this.message = message;
     }
 
-    public Music getMusic() {
+    public String getMusic() {
         return music;
     }
 
-    public void setMusic(Music music) {
+    public void setMusic(String music) {
         this.music = music;
     }
 }
