@@ -2,9 +2,13 @@ package io.github.skeffy.octave.dao;
 
 import io.github.skeffy.octave.model.Message;
 
+import java.util.List;
+
 public interface MessageDao {
 
-    Message getMessages(int userId);
+    List<Message> getThreads(int userId);
+
+    List<Message> getMessages(int rootId);
 
     Message createMessage(int senderId, int recipientId, Message message);
 
