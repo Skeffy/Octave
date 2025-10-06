@@ -6,11 +6,15 @@ import java.util.List;
 
 public interface MessageDao {
 
+    Message getMessageById(int messageId);
+
     List<Message> getThreads(int userId);
 
     List<Message> getMessages(int rootId);
 
-    Message createMessage(int senderId, int recipientId, Message message);
+    Message createMessage(Message message);
+
+    Message addMessage(Message message);
 
     int adminDeleteMessage(int userId, int messageId);
 
