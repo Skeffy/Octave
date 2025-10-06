@@ -7,13 +7,15 @@ public class User {
     private String screenName;
     private String photo;
     private String bio;
+    private boolean isAdmin = false;
 
-    public User(int id, String username, String screenName, String photo, String bio) {
+    public User(int id, String username, String screenName, String photo, String bio, boolean isAdmin) {
         this.id = id;
         this.username = username;
         this.screenName = screenName;
         this.photo = photo;
         this.bio = bio;
+        this.isAdmin = isAdmin;
     }
 
     public int getId() {
@@ -54,5 +56,13 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }
