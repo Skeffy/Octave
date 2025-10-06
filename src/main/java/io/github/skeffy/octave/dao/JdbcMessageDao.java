@@ -2,6 +2,7 @@ package io.github.skeffy.octave.dao;
 
 import io.github.skeffy.octave.exception.DaoException;
 import io.github.skeffy.octave.model.Message;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -18,6 +19,22 @@ public class JdbcMessageDao implements MessageDao{
 
     public JdbcMessageDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public Message getMessageById(int messageId) {
+        Message message = null;
+        String sql = "SELECT * FROM messages WHERE message_id = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, messageId);
+            if(results.next()) {
+                message = mapRowToMessage(results);
+            }
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Cannot connect to database", e);
+        }
+        return message;
     }
 
     @Override
@@ -55,8 +72,38 @@ public class JdbcMessageDao implements MessageDao{
     }
 
     @Override
-    public Message createMessage(int senderId, int recipientId, Message message) {
-        return null;
+    public Message createMessage(Message m) {
+        Message newMessage;
+        String sql = "INSERT INTO messages(sender_id, recipient_id, body, link) VALUES(?, ?, ?, ?) RETURNING message_id;";
+        try {
+            int newId = jdbcTemplate.queryForObject(sql, int.class, m.getSenderId(), m.getRecipientId(), m.getMessage(), m.getMusic());
+            newMessage = getMessageById(newId);
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database", e);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return newMessage;
+    }
+
+    @Override
+    public Message addMessage(Message m) {
+        Message newMessage;
+        String sql = "INSERT INTO messages(sender_id, recipient_id, parent_id, body, link) VALUES(?, ?, ?, ?) RETURNING message_id;";
+        try {
+            int newId = jdbcTemplate.queryForObject(sql, int.class, m.getSenderId(), m.getRecipientId(), m.getParentId(),
+                    m.getMessage(), m.getMusic());
+            newMessage = getMessageById(newId);
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to database", e);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return newMessage;
     }
 
     @Override
@@ -72,8 +119,11 @@ public class JdbcMessageDao implements MessageDao{
     private Message mapRowToMessage(SqlRowSet r) {
         Message m = new Message();
         m.setMessageId(r.getInt("message_id"));
+        m.setParentId(r.getInt("parent_id"));
         m.setSenderId(r.getInt("sender_id"));
         m.setRecipientId(r.getInt("recipient_id"));
+        m.setMessage(r.getString("body"));
+        m.setMusic(r.getString("link"));
         return m;
     }
 }
