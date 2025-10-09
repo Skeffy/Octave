@@ -72,11 +72,11 @@ public class JdbcMessageDao implements MessageDao{
     }
 
     @Override
-    public Message createMessage(Message m) {
+    public Message createMessage(int senderId, Message m) {
         Message newMessage;
         String sql = "INSERT INTO messages(sender_id, recipient_id, body, link) VALUES(?, ?, ?, ?) RETURNING message_id;";
         try {
-            int newId = jdbcTemplate.queryForObject(sql, int.class, m.getSenderId(), m.getRecipientId(), m.getMessage(), m.getMusic());
+            int newId = jdbcTemplate.queryForObject(sql, int.class, senderId, m.getRecipientId(), m.getMessage(), m.getMusic());
             newMessage = getMessageById(newId);
         }
         catch (CannotGetJdbcConnectionException e) {
@@ -89,11 +89,11 @@ public class JdbcMessageDao implements MessageDao{
     }
 
     @Override
-    public Message addMessage(Message m) {
+    public Message addMessage(int senderId, Message m) {
         Message newMessage;
         String sql = "INSERT INTO messages(sender_id, recipient_id, parent_id, body, link) VALUES(?, ?, ?, ?) RETURNING message_id;";
         try {
-            int newId = jdbcTemplate.queryForObject(sql, int.class, m.getSenderId(), m.getRecipientId(), m.getParentId(),
+            int newId = jdbcTemplate.queryForObject(sql, int.class, senderId, m.getRecipientId(), m.getParentId(),
                     m.getMessage(), m.getMusic());
             newMessage = getMessageById(newId);
         }
