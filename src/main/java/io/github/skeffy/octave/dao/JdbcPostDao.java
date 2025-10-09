@@ -9,6 +9,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class JdbcPostDao implements PostDao{
@@ -36,11 +38,27 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
-    public Post createPost(Post p) {
+    public List<Post> getPostsByAccount(int userId) {
+        List<Post> posts = new ArrayList<>();
+        String sql = "SELECT * FROM posts WHERE user_id = ? ORDER BY date;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            while (results.next()) {
+                posts.add(mapRowToPost(results));
+            }
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Cannot connect to database", e);
+        }
+        return posts;
+    }
+
+    @Override
+    public Post createPost(int userId, Post p) {
         Post newPost;
         String sql = "INSERT INTO posts(user_id, type, body) VALUES(?,?,?) RETURNING post_id;";
         try {
-            int newId = jdbcTemplate.queryForObject(sql, int.class, p.getUserId(), p.getType(), p.getBody());
+            int newId = jdbcTemplate.queryForObject(sql, int.class, userId, p.getType(), p.getBody());
             newPost = getPostById(newId);
         }
         catch (CannotGetJdbcConnectionException e) {
