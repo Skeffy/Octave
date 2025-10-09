@@ -9,17 +9,17 @@ import java.security.Principal;
 @Component
 public class PrincipalService {
 
-    private UserDao userDao;
+    private static UserDao userDao;
 
     public PrincipalService(UserDao userDao) {
-        this.userDao = userDao;
+        PrincipalService.userDao = userDao;
     }
 
-    int getUserId(Principal principal) {
+    public static int getUserId(Principal principal) {
         return userDao.getUserIdByUsername(principal.getName());
     }
 
-    User getUser(Principal principal) {
+    public static User getUser(Principal principal) {
         return userDao.getUserByUsername(principal.getName());
     }
 }
