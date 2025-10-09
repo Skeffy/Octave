@@ -6,6 +6,7 @@ import io.github.skeffy.octave.dao.TimelineDao;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -23,8 +24,8 @@ public class TimelineService {
         posts.addAll(timelineDao.getTrendingPosts());
         posts.addAll(timelineDao.getPostsFromPopularAccounts());
         posts.addAll(timelineDao.getRecentPosts());
-        //TODO: sort list by post date
-        timeline.setPosts(posts);
+        List<Post> sortedPosts = sortPosts(posts);
+        timeline.setPosts(sortedPosts);
         return timeline;
     }
 
@@ -34,8 +35,13 @@ public class TimelineService {
         posts.addAll(timelineDao.getFollowingPosts(userId));
         posts.addAll(timelineDao.getPostsFromUserLikes(userId));
         posts.addAll(timelineDao.getTrendingPosts());
-        //TODO: sort list by post date
-        timeline.setPosts(posts);
+        List<Post> sortedPosts = sortPosts(posts);
+        timeline.setPosts(sortedPosts);
         return timeline;
+    }
+
+    private List<Post> sortPosts(List<Post> posts) {
+        posts.sort(Comparator.comparing(Post::getDate));
+        return posts;
     }
 }
