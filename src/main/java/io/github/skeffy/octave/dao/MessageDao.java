@@ -12,9 +12,9 @@ public interface MessageDao {
 
     List<Message> getMessages(int rootId);
 
-    Message createMessage(Message message);
+    Message createMessage(int senderId, Message message);
 
-    Message addMessage(Message message);
+    Message addMessage(int messageId, Message message);
 
     int adminDeleteMessage(int userId, int messageId);
 
