@@ -2,7 +2,6 @@ package io.github.skeffy.octave.dao;
 
 import io.github.skeffy.octave.exception.DaoException;
 import io.github.skeffy.octave.model.Comment;
-import io.github.skeffy.octave.model.User;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
