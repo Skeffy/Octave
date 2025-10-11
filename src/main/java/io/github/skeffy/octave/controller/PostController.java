@@ -32,10 +32,36 @@ public class PostController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(Principal principal, @RequestBody Post post) {
         try {
             int userId = PrincipalService.getUserId(principal);
             return dao.createPost(userId, post);
+        }
+        catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "DAO error - " + e.getMessage());
+        }
+    }
+
+    @PutMapping
+    public int hidePost(Principal principal, @RequestBody int postId) {
+        try {
+            int userId = PrincipalService.getUserId(principal);
+            return dao.deleteOwnPost(userId, postId);
+        }
+        catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "DAO error - " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/admin")
+    public Integer adminHidePost(Principal principal, @RequestBody int postId) {
+        try {
+            int userId = PrincipalService.getUserId(principal);
+            if(PrincipalService.isUserAdmin(userId)) {
+                return dao.adminDeletePost(postId);
+            }
+            return null;
         }
         catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "DAO error - " + e.getMessage());
