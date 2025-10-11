@@ -10,14 +10,16 @@ public class Comment {
     private Date date;
     private int likes;
     private int parentId;
+    private boolean isVisible;
 
-    public Comment(int commentId, int userId, String body, Date date, int likes, int parentId) {
+    public Comment(int commentId, int userId, String body, Date date, int likes, int parentId, boolean isVisible) {
         this.commentId = commentId;
         this.userId = userId;
         this.body = body;
         this.date = date;
         this.likes = likes;
         this.parentId = parentId;
+        this.isVisible = isVisible;
     }
 
     public Comment() {
@@ -69,5 +71,13 @@ public class Comment {
 
     public void setParentId(int parentId) {
         this.parentId = parentId;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 }
