@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/message")
 public class MessageController {
 
-    private MessageDao messageDao;
+    private final MessageDao messageDao;
 
     public MessageController(MessageDao messageDao) {
         this.messageDao = messageDao;
@@ -44,6 +44,7 @@ public class MessageController {
     }
 
     @PostMapping("/new")
+    @ResponseStatus(HttpStatus.CREATED)
     public Message createThread(Principal principal, @RequestBody Message message) {
         try {
             int userId = PrincipalService.getUserId(principal);
@@ -55,6 +56,7 @@ public class MessageController {
     }
 
     @PostMapping("/send")
+    @ResponseStatus(HttpStatus.CREATED)
     public Message sendMessage(Principal principal, @RequestBody Message message){
         try {
             int userId = PrincipalService.getUserId(principal);
