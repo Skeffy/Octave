@@ -73,9 +73,9 @@ public class JdbcPostDao implements PostDao{
     @Override
     public int deleteOwnPost(int userId, int postId) {
         int numberOfRows = 0;
-        String sql = "DELETE FROM posts WHERE post_id = ? AND user_id = ?;";
+        String sql = "UPDATE posts SET visible = 'false' WHERE user_id = ? AND post_id = ?;";
         try {
-            numberOfRows = jdbcTemplate.update(sql, postId, userId);
+            numberOfRows = jdbcTemplate.update(sql, userId, postId);
         }
         catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -87,17 +87,31 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
-    public int adminDeletePost(int userId, int postId) {
-        return 0;
+    public int adminDeletePost(int postId) {
+        int numberOfRows = 0;
+        String sql = "UPDATE posts SET visible = 'false' WHERE post_id = ?;";
+        try {
+            numberOfRows = jdbcTemplate.update(sql, postId);
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return numberOfRows;
     }
 
     private Post mapRowToPost(SqlRowSet r) {
         Post p = new Post();
+        p.setPostId(r.getInt("post_id"));
         p.setUserId(r.getInt("user_id"));
         p.setType(r.getString("type"));
         p.setBody(r.getString("body"));
         p.setDate(r.getDate("date"));
         p.setLikes(r.getInt("likes"));
+        p.setComments(r.getInt("comments"));
+        p.setIsVisible(r.getBoolean("visible"));
         return p;
     }
 }
