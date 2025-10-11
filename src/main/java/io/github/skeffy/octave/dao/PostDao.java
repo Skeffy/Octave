@@ -14,5 +14,5 @@ public interface PostDao {
 
     int deleteOwnPost(int userId, int postId);
 
-    int adminDeletePost(int userId, int postId);
+    int adminDeletePost(int postId);
 }
