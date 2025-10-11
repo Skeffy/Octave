@@ -1,7 +1,6 @@
 package io.github.skeffy.octave.model;
 
 import java.util.Date;
-import java.util.List;
 
 public class Post {
 
@@ -11,9 +10,10 @@ public class Post {
     private String body;
     private Date date;
     private int likes;
-    private List<Comment> comments;
+    private int comments;
+    private boolean isVisible;
 
-    public Post(int postId, String type, int userId, String body, Date date, int likes, List<Comment> comments) {
+    public Post(int postId, String type, int userId, String body, Date date, int likes, int comments, boolean isVisible) {
         this.postId = postId;
         this.type = type;
         this.userId = userId;
@@ -21,6 +21,7 @@ public class Post {
         this.date = date;
         this.likes = likes;
         this.comments = comments;
+        this.isVisible = isVisible;
     }
 
     public Post() {
@@ -74,11 +75,19 @@ public class Post {
         this.likes = likes;
     }
 
-    public List<Comment> getComments() {
+    public int getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(int comments) {
         this.comments = comments;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setIsVisible(boolean isVisible) {
+        this.isVisible = isVisible;
     }
 }
