@@ -4,7 +4,9 @@ import io.github.skeffy.octave.model.User;
 
 public interface UserDao {
 
-    int getUserIdByUsername(String username);
+    Integer getUserIdByUsername(String username);
 
     User getUserByUsername(String username);
+
+    boolean getUserAdminStatusById(int userId);
 }
