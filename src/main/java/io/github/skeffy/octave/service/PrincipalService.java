@@ -22,4 +22,8 @@ public class PrincipalService {
     public static User getUser(Principal principal) {
         return userDao.getUserByUsername(principal.getName());
     }
+
+    public static boolean isUserAdmin(int userId) {
+        return userDao.getUserAdminStatusById(userId);
+    }
 }
