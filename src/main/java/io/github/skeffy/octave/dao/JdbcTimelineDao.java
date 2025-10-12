@@ -63,7 +63,7 @@ public class JdbcTimelineDao implements TimelineDao{
         p.setBody(r.getString("body"));
         p.setDate(r.getDate("timestamp"));
         p.setLikes(r.getInt("likeCount"));
-        p.setComments(r.getObject("comments", List.class));
+        p.setComments(r.getInt("comments"));
         return p;
     }
 }
