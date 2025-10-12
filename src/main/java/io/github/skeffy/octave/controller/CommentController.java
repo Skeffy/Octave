@@ -43,7 +43,7 @@ public class CommentController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/delete")
     public int hideComment(Principal principal, @RequestBody int commentId) {
         try {
             int userId = PrincipalService.getUserId(principal);
@@ -54,7 +54,7 @@ public class CommentController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/admin/delete")
     public Integer adminHideComment(Principal principal, @RequestBody int commentId) {
         try {
             int userId = PrincipalService.getUserId(principal);
